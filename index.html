@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="LLMSeg: Training-Free Text-Prompted Image Segmentation with B-Splines. A frozen multimodal LLM segments images by writing boxes and closed B-spline outlines, with no training and no segmentation head.">
+  <meta name="keywords"
+    content="LLMSeg, text-prompted segmentation, referring segmentation, reasoning segmentation, multimodal LLM, B-spline, training-free, SAM 3, ReasonSeg, RefCOCO, open-vocabulary">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="LLMSeg: Training-Free Text-Prompted Image Segmentation with B-Splines">
+  <meta property="og:description"
+    content="A frozen multimodal LLM becomes a text-prompted image segmenter by writing boxes and closed B-splines. No training, no mask decoder.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="static/assets/teaser/teaser.png">
+  <title>LLMSeg: Training-Free Text-Prompted Image Segmentation with B-Splines</title>
+  <link rel="icon" type="image/svg+xml" href="./static/images/favicon.svg">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script defer src="./static/js/index.js"></script>
+</head>
+
+<body>
+
+  <!-- Hero / Title -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">LLMSeg: Training-Free Text-Prompted Image Segmentation with
+              B-Splines</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://abdullahamdi.com/">Abdullah Hamdi</a></span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">King Abdullah University of Science and Technology (KAUST)</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- arXiv Link: enable once the arXiv id exists
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/XXXX.XXXXX" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="ai ai-arxiv"></i></span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                -->
+                <!-- Code Link -->
+                <span class="link-block">
+                  <a href="https://github.com/ajhamdi/llmseg-code" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fab fa-github"></i></span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Results Link -->
+                <span class="link-block">
+                  <a href="#results" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-trophy" style="color: #FFD700;"></i></span>
+                    <span>Results</span>
+                  </a>
+                </span>
+              </div>
+
+              <!-- Section Navigation Tags -->
+              <div class="publication-links" style="margin-top: 0.5rem;">
+                <span class="link-block">
+                  <a href="#statistics" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-chart-pie" style="color: #E91E63;"></i></span>
+                    <span>At a Glance</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#method" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-cogs" style="color: #3F51B5;"></i></span>
+                    <span>Method</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#comparisons" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-images" style="color: #F44336;"></i></span>
+                    <span>Comparisons</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#reasoning" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-lightbulb" style="color: #FF9800;"></i></span>
+                    <span>Reasoning</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#BibTeX" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-quote-right" style="color: #9C27B0;"></i></span>
+                    <span>BibTeX</span>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teaser -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <h2 class="subtitle has-text-centered" style="margin-bottom: 1.5rem;">
+          <b>LLMSeg</b> turns an off-the-shelf multimodal LLM into a text-prompted image segmenter
+          <b>with no training, no segmentation head and no mask decoder</b>. The model is only asked for
+          coordinates (boxes and B-spline control points) as JSON; parsing, box confinement, rasterization and
+          stopping are deterministic code.
+        </h2>
+        <img class="figure-img" src="static/assets/teaser/teaser.png"
+          alt="LLMSeg teaser: example masks for a donut, a car that may need repair, a Cityscapes label map and a speedometer, and the pipeline from input to mask" width="100%">
+        <p class="has-text-centered caption">
+          Top: LLMSeg handles plain, reasoning and multi-class queries with the same frozen model. Bottom: the frozen
+          MLLM writes B-splines per instance box, the code rasterizes them, and the overlay is fed back to the model
+          for the next pass.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Statistics -->
+  <section class="section stats-section" id="statistics">
+    <div class="container is-max-desktop">
+      <div class="columns is-multiline is-centered has-text-centered">
+        <div class="column is-2">
+          <div class="stat-number" data-target="0">0</div>
+          <div class="stat-label">Training Steps</div>
+        </div>
+        <div class="column is-2">
+          <div class="stat-number" data-target="11">0</div>
+          <div class="stat-label">Benchmarks</div>
+        </div>
+        <div class="column is-2">
+          <div class="stat-number" data-target="71.5" data-decimals="1">0</div>
+          <div class="stat-label">ReasonSeg val cIoU</div>
+        </div>
+        <div class="column is-2">
+          <div class="stat-number" data-target="18" data-prefix="&le;">0</div>
+          <div class="stat-label">LLM Calls per Image</div>
+        </div>
+        <div class="column is-2">
+          <div class="stat-number" data-target="200">0</div>
+          <div class="stat-label">Instances per Image</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Abstract -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Promptable segmentation models such as SAM&nbsp;3 achieve remarkable open-vocabulary performance but
+              require dedicated architectures, large-scale annotation engines, and task-specific training. We ask a
+              different question: can a general-purpose multimodal large language model (MLLM) segment images
+              <em>directly</em>, without an added segmentation head, mask decoder, or training? We present
+              <b>LLMSeg</b>, a training-free pipeline that turns a vision-capable LLM into a text-prompted image
+              segmenter. LLMSeg decomposes segmentation into three LLM-driven stages. First, <b>detect</b> localizes
+              all instances matching a free-form text query and describes their coarse morphology. Next,
+              <b>segment</b> traces each instance using closed periodic B-splines confined to its detected box. These
+              splines define an outer boundary and optional hole loops. Finally, <b>refine</b> iteratively proposes
+              focus boxes around residual errors and retraces confined splines. The process ends when the mask
+              stabilizes or the pass budget is exhausted. The output is a binary mask with inspectable intermediate
+              geometry.
+            </p>
+            <p>
+              We evaluate LLMSeg across ten referring and reasoning segmentation splits (ReasonSeg and RefCOCO/+/g).
+              We also evaluate open-vocabulary instance segmentation (LVIS, COCO, and SA-Co), semantic segmentation,
+              and zero-shot detection (ODinW13 and RF-100VL). With an off-the-shelf Gemini-3.7-Flash backend, LLMSeg
+              is competitive with and often surpasses the specialist SAM&nbsp;3 model on identical items. It reaches
+              <b>69.6 gIoU</b> (<b>71.5 cIoU</b>) on ReasonSeg val without additional segmentation-specific training.
+              Backend model updates can improve accuracy without retraining the pipeline.
+            </p>
+          </div>
+          <div class="keyword-tags">
+            <span class="tag is-medium is-info is-light">Training-Free</span>
+            <span class="tag is-medium is-info is-light">Text-Prompted Segmentation</span>
+            <span class="tag is-medium is-info is-light">Reasoning Segmentation</span>
+            <span class="tag is-medium is-info is-light">Referring Segmentation</span>
+            <span class="tag is-medium is-info is-light">B-Splines</span>
+            <span class="tag is-medium is-info is-light">Multimodal LLMs</span>
+            <span class="tag is-medium is-info is-light">Open-Vocabulary</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method -->
+  <section class="section alt-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" id="method">How It Works</h2>
+        </div>
+      </div>
+      <div class="content has-text-centered">
+        <img class="figure-img" src="static/assets/pipeline/pipeline.png" alt="LLMSeg three-stage pipeline: detect, segment, refine" width="100%">
+      </div>
+
+      <div class="columns is-multiline stage-cards">
+        <div class="column is-one-third">
+          <div class="stage-card">
+            <div class="stage-num">1</div>
+            <h3 class="stage-title">Detect</h3>
+            <p>Image and text query go in. Out come N instance boxes with a short morphology note for each, in
+              reading order. Near-duplicate boxes are dropped.</p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="stage-card">
+            <div class="stage-num">2</div>
+            <h3 class="stage-title">Segment</h3>
+            <p>One call returns a closed periodic B-spline outline per instance (plus optional hole loops). Control
+              points are clamped to the instance box, then the curve is sampled and filled into a mask.</p>
+          </div>
+        </div>
+        <div class="column is-one-third">
+          <div class="stage-card">
+            <div class="stage-num">3</div>
+            <h3 class="stage-title">Refine</h3>
+            <p>The overlay of the current mask goes back to the model, which proposes signed focus boxes (add or
+              remove). One batched call retraces splines for all of them. Repeats for up to T passes and stops early
+              once the mask stops moving.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-multiline principle-cards">
+        <div class="column is-half">
+          <div class="principle-card">
+            <span class="principle-icon"><i class="fas fa-vector-square"></i></span>
+            <div>
+              <h4>Box confinement</h4>
+              <p>Every control point and every sampled curve point is clamped to its box, so a mask can never leave
+                its instance box.</p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="principle-card">
+            <span class="principle-icon"><i class="fas fa-bezier-curve"></i></span>
+            <div>
+              <h4>Closed periodic B-splines</h4>
+              <p>Outlines are compact, smooth and inspectable. Holes are carved back out, and per-instance masks are
+                united into the final mask.</p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="principle-card">
+            <span class="principle-icon"><i class="fas fa-lock"></i></span>
+            <div>
+              <h4>Soft-lock composition</h4>
+              <p>Each instance carries a signed commitment field next to its mask, so successive refinement passes
+                cannot simply undo each other.</p>
+            </div>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="principle-card">
+            <span class="principle-icon"><i class="fas fa-coins"></i></span>
+            <div>
+              <h4>Bounded cost</h4>
+              <p>One call each for detect and segment, at most two per refinement pass. With the default T = 8 that is
+                at most 18 calls per image, usually far fewer thanks to early stopping.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3" id="results">Main Results</h2>
+          <p class="subtitle is-6">LLMSeg with Gemini-3.7-Flash (T = 8) against SAM&nbsp;3 on identical items.
+            Best score per metric is shown in <span class="best-score">bold green</span>. Full tables, baselines and
+            ablations are in the paper.</p>
+        </div>
+      </div>
+      <div class="table-container">
+        <table class="table is-bordered is-striped is-hoverable is-fullwidth bench-table">
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th>Metric</th>
+              <th>LLMSeg (w/o refine)</th>
+              <th class="highlight-col">LLMSeg</th>
+              <th>SAM 3 (same items)</th>
+            </tr>
+          </thead>
+          <tbody id="results-body">
+            <!-- Rendered from RESULTS in index.js -->
+          </tbody>
+        </table>
+      </div>
+      <p class="has-text-centered caption">
+        LLMSeg is ahead on ReasonSeg, RefCOCO/+/g, ADE20K, ODinW13 and RF-100VL and on LVIS/COCO cgF1. SAM&nbsp;3
+        remains ahead on SA-Co/Gold, Cityscapes, and LVIS/COCO box and mask AP.
+      </p>
+
+      <div class="columns is-centered has-text-centered" style="margin-top: 3rem;">
+        <div class="column">
+          <h3 class="title is-4" id="results-visualization">Referring and Reasoning Segmentation (cIoU)</h3>
+        </div>
+      </div>
+      <div class="chart-legend">
+        <span><i class="swatch swatch-noref"></i>LLMSeg (w/o refine)</span>
+        <span><i class="swatch swatch-ours"></i>LLMSeg</span>
+        <span><i class="swatch swatch-sam3"></i>SAM 3</span>
+      </div>
+      <div id="cIoU-chart" class="bar-chart"></div>
+    </div>
+  </section>
+
+  <!-- Comparisons -->
+  <section class="section alt-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3" id="comparisons">Qualitative Comparisons</h2>
+          <p class="subtitle is-6">Each row is one item with its query. The chip on each prediction is that
+            prediction's IoU with the ground truth. SAM-3 Agent is an MLLM driving SAM&nbsp;3 as a tool.</p>
+        </div>
+      </div>
+      <div class="tabs is-centered is-boxed is-medium" id="comparisons-tabs">
+        <ul>
+          <li class="is-active" data-tab="tab-comp-reasoning"><a>Reasoning</a></li>
+          <li data-tab="tab-comp-referring"><a>Referring</a></li>
+          <li data-tab="tab-comp-openvocab"><a>Open Vocabulary</a></li>
+          <li data-tab="tab-comp-semantic"><a>Semantic (Cityscapes)</a></li>
+        </ul>
+      </div>
+      <div class="tab-content">
+        <div id="tab-comp-reasoning" class="tab-pane is-active"></div>
+        <div id="tab-comp-referring" class="tab-pane" style="display:none;"></div>
+        <div id="tab-comp-openvocab" class="tab-pane" style="display:none;"></div>
+        <div id="tab-comp-semantic" class="tab-pane" style="display:none;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reasoning sliders -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" id="reasoning">Reasoning Queries Work Off the Shelf</h2>
+          <p class="subtitle is-6">ReasonSeg items segmented by LLMSeg with Gemini-3.7-Flash. The same model reads the
+            query and segments, with no agent wrapper or query rewriting. Drag the slider to compare the input
+            with the result.</p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/reasoning/letters_recseg.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/reasoning/letters_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text">&ldquo;In an educational setting, children often use different materials to learn about
+            letters, numbers, and words. What object in the picture could be used as a visual aid for learning about
+            letters and words?&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/reasoning/teabowl_recseg.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/reasoning/teabowl_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text">&ldquo;The general steps for brewing tea are to put tea leaves into a teacup and then
+            pour hot water over them. What container in the picture is most likely to be used next for pouring hot
+            water to make tea?&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/reasoning/speed_recseg.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/reasoning/speed_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text">&ldquo;the places where the driver can observe the speed&rdquo;</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Links -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Related Links</h2>
+          <div class="content has-text-justified">
+            <p><a href="https://ai.meta.com/sam3/">SAM 3: Segment Anything with Concepts</a>, the specialist baseline we compare against</p>
+            <p><a href="https://github.com/dvlab-research/LISA">LISA and ReasonSeg: reasoning segmentation via large language model</a></p>
+            <p><a href="https://huggingface.co/datasets/facebook/SACo-Gold">SA-Co/Gold</a></p>
+            <p><a href="https://www.lvisdataset.org/">LVIS</a>, <a href="https://cocodataset.org/">COCO</a>,
+              <a href="https://ade20k.csail.mit.edu/">ADE20K</a>, <a href="https://www.cityscapes-dataset.com/">Cityscapes</a></p>
+            <p><a href="https://github.com/roboflow/rf100-vl">RF100-VL</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BibTeX -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <div class="bibtex-wrap">
+        <button type="button" class="button is-small is-dark copy-btn" id="copy-bibtex">
+          <span class="icon"><i class="fas fa-copy"></i></span><span>Copy</span>
+        </button>
+<pre><code id="bibtex-text">@article{hamdi2026llmseg,
+  title   = {LLMSeg: Training-Free Text-Prompted Image Segmentation with B-Splines},
+  author  = {Hamdi, Abdullah},
+  journal = {arXiv preprint},
+  year    = {2026}
+}</code></pre>
+      </div>
+      <p class="has-text-justified" style="margin-top: 1rem;">
+        We evaluate on ReasonSeg, RefCOCO/+/g, SA-Co, LVIS, COCO, ADE20K, Cityscapes, ODinW and RF-100VL, and follow
+        the image evaluation suite of SAM&nbsp;3. None of the datasets is redistributed here, so please respect each
+        dataset's license. We thank the authors of these benchmarks for making them available.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="https://github.com/ajhamdi/llmseg-code" aria-label="Code on GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p style="text-align:center">
+              Source code mainly borrowed from <a href="https://keunhong.com/">Keunhong Park</a>'s <a
+                href="https://nerfies.github.io/">Nerfies website</a>.
+            </p>
+            <p style="text-align:center">
+              Please contact <a href="https://abdullahamdi.com/">Abdullah Hamdi</a> for feedback and questions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>

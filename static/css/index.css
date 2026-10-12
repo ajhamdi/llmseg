@@ -1,0 +1,684 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-title {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors a {
+  color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-video {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  border-radius: 10px !important;
+}
+
+.publication-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Statistics Counter Section */
+.stats-section {
+  background: #f8fafc;
+  padding: 3rem 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.stat-number {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #0f3460;
+  font-family: 'Google Sans', sans-serif;
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  color: #334155;
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+/* HTML Table Styling */
+.table-container {
+  overflow-x: auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+.bench-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: none !important;
+  font-size: 0.95rem;
+}
+
+.bench-table thead th {
+  background: linear-gradient(135deg, #16213e 0%, #1a2744 100%);
+  color: #f0f4ff;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+  border-color: #243352 !important;
+  padding: 0.85em 1em;
+  letter-spacing: 0.02em;
+}
+
+.bench-table tbody td {
+  text-align: center;
+  vertical-align: middle;
+  border-color: #e2e8f0 !important;
+  padding: 0.7em 0.9em;
+  color: #1e293b;
+}
+
+.bench-table thead th:first-child {
+  text-align: left;
+}
+
+.bench-table tbody td:first-child {
+  text-align: left;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.bench-table tbody tr:nth-child(odd) {
+  background-color: #fff;
+}
+
+.bench-table tbody tr:nth-child(even) {
+  background-color: #f1f5f9;
+}
+
+.bench-table tbody tr:hover {
+  background-color: #e8edf4 !important;
+}
+
+.highlight-col {
+  background-color: #dbeafe !important;
+  font-weight: 600;
+  color: #1e3a5f !important;
+}
+
+.bench-table thead th.highlight-col {
+  background: linear-gradient(135deg, #1e5cb3 0%, #2563eb 100%) !important;
+  color: #ffffff !important;
+}
+
+.bench-table tbody tr:nth-child(even) .highlight-col {
+  background-color: #c7d8f0 !important;
+}
+
+.bench-table tbody tr:hover .highlight-col {
+  background-color: #bdd0ea !important;
+}
+
+.best-score {
+  color: #15803d;
+  font-weight: 700;
+  background-color: rgba(34, 197, 94, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Keep the best-score green text in the shaded AVG column */
+.bench-table tbody td.highlight-col.best-score {
+  color: #15803d !important;
+}
+
+.table-separator td {
+  padding: 0 !important;
+  background: linear-gradient(90deg, #16213e, #e94560, #16213e) !important;
+  height: 2px;
+  border: none !important;
+}
+
+/* Tab Content */
+.tabs li.is-active a {
+  border-bottom-color: #16213e !important;
+  color: #16213e !important;
+  font-weight: 600;
+}
+
+.tabs a {
+  color: #64748b;
+}
+
+.tabs a:hover {
+  color: #16213e;
+  border-bottom-color: #94a3b8 !important;
+}
+
+.tab-pane {
+  padding: 1rem 0;
+}
+
+/* Figure Images */
+.figure-img {
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Terminal / skill-style card */
+.skill-card {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+}
+
+.skill-card-header {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: #f1f5f9;
+  padding: 0.6rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.skill-card-icon {
+  color: #38bdf8;
+  font-size: 1rem;
+}
+
+.skill-card-title {
+  font-family: 'Google Sans', monospace;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.skill-card-body {
+  padding: 1.2rem 1.5rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #1e293b;
+  background: #ffffff;
+}
+
+.skill-section {
+  margin-bottom: 1.2rem;
+}
+
+.skill-section:last-child {
+  margin-bottom: 0;
+}
+
+.skill-heading {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.skill-list,
+.skill-checklist {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.skill-list li,
+.skill-checklist li {
+  margin-bottom: 0.4rem;
+}
+
+.skill-list ul {
+  margin-top: 0.3rem;
+  padding-left: 1.2rem;
+}
+
+/* Keyword Tags */
+.keyword-tags {
+  margin-top: 1rem;
+}
+
+.keyword-tags .tag {
+  margin: 0.2rem;
+}
+
+/* ---------------------------------------------------------- LLMSeg page -- */
+
+.caption {
+  margin-top: 0.9rem;
+  color: #64748b;
+  font-size: 0.92rem;
+  font-style: italic;
+}
+
+.alt-section {
+  background: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Code card */
+.code-body {
+  background: #0f172a;
+  padding: 0;
+}
+
+.code-body pre {
+  margin: 0;
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 0.85rem;
+  padding: 1.1rem 1.4rem;
+  overflow-x: auto;
+}
+
+.code-body code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* Method: stage cards */
+.stage-cards {
+  margin-top: 1.5rem;
+}
+
+.stage-card {
+  height: 100%;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1.2rem 1.3rem 1.3rem;
+  box-shadow: 0 2px 12px rgba(15, 52, 96, 0.07);
+}
+
+.stage-num {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #1e5cb3;
+  color: #fff;
+  font-weight: 700;
+  font-family: 'Google Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.6rem;
+}
+
+.stage-title {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.4rem;
+}
+
+.stage-card p {
+  font-size: 0.95rem;
+  color: #334155;
+  line-height: 1.55;
+}
+
+/* Method: principle cards */
+.principle-card {
+  height: 100%;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 1rem 1.2rem;
+  border-left: 4px solid #2563eb;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
+}
+
+.principle-icon {
+  color: #2563eb;
+  font-size: 1.3rem;
+  width: 1.6rem;
+  text-align: center;
+  padding-top: 0.15rem;
+}
+
+.principle-card h4 {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+}
+
+.principle-card p {
+  font-size: 0.92rem;
+  color: #334155;
+  line-height: 1.5;
+}
+
+/* Results bar chart */
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+.swatch {
+  display: inline-block;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 3px;
+  margin-right: 0.4rem;
+  vertical-align: -1px;
+}
+
+.swatch-noref { background: #93c5fd; }
+.swatch-ours { background: #1e5cb3; }
+.swatch-sam3 { background: #f59e0b; }
+
+.bar-chart {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+  padding: 1rem 1.2rem;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid #eef2f7;
+}
+
+.bar-row:last-child {
+  border-bottom: none;
+}
+
+.bar-label {
+  flex: 0 0 11rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.bar-group {
+  flex: 1;
+  min-width: 0;
+}
+
+.bar-line {
+  display: flex;
+  align-items: center;
+  height: 1.05rem;
+  margin: 2px 0;
+}
+
+.bar {
+  position: relative;
+  height: 100%;
+  border-radius: 0 3px 3px 0;
+  transition: width 0.9s ease-out;
+}
+
+.bar-val {
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 6px;
+  font-size: 0.78rem;
+  color: #334155;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Qualitative comparisons */
+.cmp-item {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.08);
+  padding: 0.9rem 1rem 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.cmp-head {
+  margin-bottom: 0.7rem;
+  font-size: 0.93rem;
+  line-height: 1.45;
+}
+
+.cmp-bench {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1e3a5f;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: 1px 8px;
+  margin-right: 0.6rem;
+}
+
+.cmp-query {
+  font-style: italic;
+  color: #1e293b;
+}
+
+.cmp-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.cmp-cols-5 { grid-template-columns: repeat(5, 1fr); }
+.cmp-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+.cmp-fig {
+  margin: 0;
+}
+
+.cmp-fig img {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+}
+
+.cmp-fig figcaption {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #475569;
+  margin-top: 0.3rem;
+}
+
+.cmp-fig-ours img {
+  outline: 3px solid #2563eb;
+  outline-offset: -3px;
+}
+
+.cmp-fig-ours figcaption {
+  color: #1e5cb3;
+}
+
+/* Image comparison slider */
+.img-compare {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(15, 52, 96, 0.15);
+  cursor: ew-resize;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  background: #0a0a0a;
+}
+
+.img-compare img {
+  display: block;
+  width: 100%;
+  pointer-events: none;
+}
+
+.img-compare .ic-over {
+  position: absolute;
+  inset: 0;
+}
+
+.img-compare .ic-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  margin-left: -1px;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.img-compare .ic-handle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.35);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
+}
+
+.img-compare .ic-arrow-l,
+.img-compare .ic-arrow-r {
+  position: absolute;
+  top: 50%;
+  margin-top: -6px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  z-index: 1;
+}
+
+.img-compare .ic-arrow-l {
+  border-right-color: #fff;
+  left: 50%;
+  margin-left: -17px;
+}
+
+.img-compare .ic-arrow-r {
+  border-left-color: #fff;
+  left: 50%;
+  margin-left: 5px;
+}
+
+.img-compare .ic-label {
+  position: absolute;
+  bottom: 0;
+  margin: 0.7rem;
+  padding: 2px 10px;
+  background: rgba(18, 18, 18, 0.75);
+  color: #fff;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.img-compare .ic-label-left { left: 0; }
+.img-compare .ic-label-right { right: 0; }
+
+.query-text {
+  margin-top: 0.7rem;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  font-style: italic;
+  color: #475569;
+}
+
+/* BibTeX */
+.bibtex-wrap {
+  position: relative;
+}
+
+.bibtex-wrap .copy-btn {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 2;
+}
+
+/* Small screens */
+@media (max-width: 768px) {
+  .cmp-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .bar-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.2rem;
+  }
+
+  .bar-label {
+    flex: none;
+  }
+
+  .stat-number {
+    font-size: 2.2rem;
+  }
+}
+
+/* Results table: keep multi-number cells on one line */
+#results-body td {
+  white-space: nowrap;
+}
+
+#results-body .best-score {
+  padding: 1px 4px;
+}
