@@ -75,9 +75,9 @@
               <!-- Section Navigation Tags -->
               <div class="publication-links" style="margin-top: 0.5rem;">
                 <span class="link-block">
-                  <a href="#statistics" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fas fa-chart-pie" style="color: #E91E63;"></i></span>
-                    <span>At a Glance</span>
+                  <a href="#reasoning" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-lightbulb" style="color: #FF9800;"></i></span>
+                    <span>Reasoning</span>
                   </a>
                 </span>
                 <span class="link-block">
@@ -93,15 +93,9 @@
                   </a>
                 </span>
                 <span class="link-block">
-                  <a href="#reasoning" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fas fa-lightbulb" style="color: #FF9800;"></i></span>
-                    <span>Reasoning</span>
-                  </a>
-                </span>
-                <span class="link-block">
-                  <a href="#BibTeX" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fas fa-quote-right" style="color: #9C27B0;"></i></span>
-                    <span>BibTeX</span>
+                  <a href="#backends" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-layer-group" style="color: #009688;"></i></span>
+                    <span>Backends</span>
                   </a>
                 </span>
               </div>
@@ -129,34 +123,6 @@
           MLLM writes B-splines per instance box, the code rasterizes them, and the overlay is fed back to the model
           for the next pass.
         </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Key Statistics -->
-  <section class="section stats-section" id="statistics">
-    <div class="container is-max-desktop">
-      <div class="columns is-multiline is-centered has-text-centered">
-        <div class="column is-2">
-          <div class="stat-number" data-target="0">0</div>
-          <div class="stat-label">Training Steps</div>
-        </div>
-        <div class="column is-2">
-          <div class="stat-number" data-target="11">0</div>
-          <div class="stat-label">Benchmarks</div>
-        </div>
-        <div class="column is-2">
-          <div class="stat-number" data-target="71.5" data-decimals="1">0</div>
-          <div class="stat-label">ReasonSeg val cIoU</div>
-        </div>
-        <div class="column is-2">
-          <div class="stat-number" data-target="18" data-prefix="&le;">0</div>
-          <div class="stat-label">LLM Calls per Image</div>
-        </div>
-        <div class="column is-2">
-          <div class="stat-number" data-target="200">0</div>
-          <div class="stat-label">Instances per Image</div>
-        </div>
       </div>
     </div>
   </section>
@@ -205,8 +171,188 @@
     </div>
   </section>
 
-  <!-- Method -->
+  <!-- Reasoning sliders -->
   <section class="section alt-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" id="reasoning">Reasoning Queries Work Off the Shelf</h2>
+          <p class="subtitle is-6">ReasonSeg items segmented by LLMSeg with Gemini-3.7-Flash. The same model reads the
+            query and segments, with no agent wrapper or query rewriting. Drag the slider to compare the input
+            with the result. The same sliders below show referring and semantic segmentation.</p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/reasoning/letters_recseg.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/reasoning/letters_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text">&ldquo;In an educational setting, children often use different materials to learn about
+            letters, numbers, and words. What object in the picture could be used as a visual aid for learning about
+            letters and words?&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/reasoning/teabowl_recseg.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/reasoning/teabowl_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text">&ldquo;The general steps for brewing tea are to put tea leaves into a teacup and then
+            pour hot water over them. What container in the picture is most likely to be used next for pouring hot
+            water to make tea?&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/reasoning/speed_recseg.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/reasoning/speed_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text">&ldquo;the places where the driver can observe the speed&rdquo;</p>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered" style="margin-top: 3rem;">
+        <div class="column is-four-fifths">
+          <h3 class="title is-4" id="referring-demo">Referring Expressions</h3>
+          <p class="subtitle is-6">RefCOCO, RefCOCO+ and RefCOCOg items. The short phrase is the whole prompt.</p>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/qual/refcocog_keyboard_ours.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/qual/refcocog_keyboard_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text"><span class="query-bench">RefCOCOg</span> &ldquo;the gray keyboard with the touch pad&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/qual/refcocog_bowlright_ours.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/qual/refcocog_bowlright_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text"><span class="query-bench">RefCOCOg</span> &ldquo;bowl on right&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/qual/refcoco_gurl_ours.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/qual/refcoco_gurl_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text"><span class="query-bench">RefCOCO</span> &ldquo;gurl&rdquo;</p>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/qual/refcocoplus_broccoli_ours.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/qual/refcocoplus_broccoli_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text"><span class="query-bench">RefCOCO+</span> &ldquo;longest stem of broccoli&rdquo;</p>
+        </div>
+        <div class="column is-one-third">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/qual/refcocoplus_toast_ours.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/qual/refcocoplus_toast_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+          <p class="query-text"><span class="query-bench">RefCOCO+</span> &ldquo;toasted darker larger half&rdquo;</p>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered" style="margin-top: 3rem;">
+        <div class="column is-four-fifths">
+          <h3 class="title is-4" id="semantic-demo">Semantic Segmentation</h3>
+          <p class="subtitle is-6">Cityscapes val. One query lists all 19 class names, and the model labels every
+            region in a single pass.</p>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-half">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/semantic/city_b_rec.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/semantic/city_b_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/semantic/city_c_rec.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/semantic/city_c_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-half">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/semantic/city_d_rec.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/semantic/city_d_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+        </div>
+        <div class="column is-half">
+          <div class="img-compare">
+            <img class="ic-under" src="static/assets/semantic/city_e_rec.jpg" alt="LLMSeg result" loading="lazy">
+            <div class="ic-over"><img src="static/assets/semantic/city_e_input.jpg" alt="Input" loading="lazy"></div>
+            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
+            <span class="ic-label ic-label-left">Input</span>
+            <span class="ic-label ic-label-right">LLMSeg</span>
+          </div>
+        </div>
+      </div>
+      <div class="chart-legend sem-legend">
+        <span><i class="swatch" style="background: rgb(128,64,128);"></i>road</span>
+        <span><i class="swatch" style="background: rgb(244,35,232);"></i>sidewalk</span>
+        <span><i class="swatch" style="background: rgb(70,70,70);"></i>building</span>
+        <span><i class="swatch" style="background: rgb(102,102,156);"></i>wall</span>
+        <span><i class="swatch" style="background: rgb(190,153,153);"></i>fence</span>
+        <span><i class="swatch" style="background: rgb(153,153,153);"></i>pole</span>
+        <span><i class="swatch" style="background: rgb(250,170,30);"></i>traffic light</span>
+        <span><i class="swatch" style="background: rgb(220,220,0);"></i>traffic sign</span>
+        <span><i class="swatch" style="background: rgb(107,142,35);"></i>vegetation</span>
+        <span><i class="swatch" style="background: rgb(152,251,152);"></i>terrain</span>
+        <span><i class="swatch" style="background: rgb(70,130,180);"></i>sky</span>
+        <span><i class="swatch" style="background: rgb(220,20,60);"></i>person</span>
+        <span><i class="swatch" style="background: rgb(255,0,0);"></i>rider</span>
+        <span><i class="swatch" style="background: rgb(0,0,142);"></i>car</span>
+        <span><i class="swatch" style="background: rgb(0,0,70);"></i>truck</span>
+        <span><i class="swatch" style="background: rgb(0,60,100);"></i>bus</span>
+        <span><i class="swatch" style="background: rgb(0,80,100);"></i>train</span>
+        <span><i class="swatch" style="background: rgb(0,0,230);"></i>motorcycle</span>
+        <span><i class="swatch" style="background: rgb(119,11,32);"></i>bicycle</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Method -->
+  <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
@@ -291,53 +437,54 @@
   </section>
 
   <!-- Results -->
-  <section class="section">
+  <section class="section alt-section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
           <h2 class="title is-3" id="results">Main Results</h2>
           <p class="subtitle is-6">LLMSeg with Gemini-3.7-Flash (T = 8) against SAM&nbsp;3 on identical items.
-            Best score per metric is shown in <span class="best-score">bold green</span>. Full tables, baselines and
-            ablations are in the paper.</p>
+            The best score in each group is shown in <span class="res-val-key">bold green</span>. SAM&nbsp;3 Agent is SAM&nbsp;3 driven interactively by an LLM agent (Gemini-3.7-Flash here).</p>
         </div>
       </div>
-      <div class="table-container">
-        <table class="table is-bordered is-striped is-hoverable is-fullwidth bench-table">
-          <thead>
-            <tr>
-              <th>Benchmark</th>
-              <th>Metric</th>
-              <th>LLMSeg (w/o refine)</th>
-              <th class="highlight-col">LLMSeg</th>
-              <th>SAM 3 (same items)</th>
-            </tr>
-          </thead>
-          <tbody id="results-body">
-            <!-- Rendered from RESULTS in index.js -->
-          </tbody>
-        </table>
-      </div>
-      <p class="has-text-centered caption">
-        LLMSeg is ahead on ReasonSeg, RefCOCO/+/g, ADE20K, ODinW13 and RF-100VL and on LVIS/COCO cgF1. SAM&nbsp;3
-        remains ahead on SA-Co/Gold, Cityscapes, and LVIS/COCO box and mask AP.
-      </p>
-
-      <div class="columns is-centered has-text-centered" style="margin-top: 3rem;">
+      <div class="columns is-centered has-text-centered" style="margin-top: 2.5rem;">
         <div class="column">
-          <h3 class="title is-4" id="results-visualization">Referring and Reasoning Segmentation (cIoU)</h3>
+          <h3 class="title is-4" id="results-visualization">Referring and Reasoning Segmentation</h3>
+          <p class="subtitle is-6">cIoU on each split.</p>
         </div>
       </div>
       <div class="chart-legend">
+        <span><i class="swatch swatch-gsam"></i>Grounded SAM</span>
+        <span><i class="swatch swatch-rsvp"></i>RSVP (GPT-4o)</span>
+        <span><i class="swatch swatch-sam3"></i>SAM 3</span>
+        <span><i class="swatch swatch-agent"></i>SAM 3 Agent</span>
         <span><i class="swatch swatch-noref"></i>LLMSeg (w/o refine)</span>
         <span><i class="swatch swatch-ours"></i>LLMSeg</span>
-        <span><i class="swatch swatch-sam3"></i>SAM 3</span>
       </div>
-      <div id="cIoU-chart" class="bar-chart"></div>
+      <div id="ref-figure" class="res-grid" style="--cols: 5;"></div>
+
+      <div class="columns is-centered has-text-centered" style="margin-top: 3rem;">
+        <div class="column">
+          <h3 class="title is-4" id="results-table">Open-Vocabulary Segmentation, Semantic Segmentation and Detection</h3>
+          <p class="subtitle is-6">Instance and semantic segmentation, plus zero-shot detection, each with
+            the benchmark's standard metric.</p>
+        </div>
+      </div>
+      <div class="chart-legend">
+        <span><i class="swatch swatch-gdino"></i>gDino-T</span>
+        <span><i class="swatch swatch-sam3"></i>SAM 3</span>
+        <span><i class="swatch swatch-noref"></i>LLMSeg (w/o refine)</span>
+        <span><i class="swatch swatch-ours"></i>LLMSeg</span>
+      </div>
+      <div id="ov-figure" class="res-grid res-grid-tight" style="--cols: 6;"></div>
+      <p class="has-text-centered caption">
+        LLMSeg is ahead on LVIS, COCO, ADE20K, ODinW13 and RF-100VL. SAM&nbsp;3 remains ahead on
+        Cityscapes.
+      </p>
     </div>
   </section>
 
   <!-- Comparisons -->
-  <section class="section alt-section">
+  <section class="section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column">
@@ -346,70 +493,27 @@
             prediction's IoU with the ground truth. SAM-3 Agent is an MLLM driving SAM&nbsp;3 as a tool.</p>
         </div>
       </div>
-      <div class="tabs is-centered is-boxed is-medium" id="comparisons-tabs">
-        <ul>
-          <li class="is-active" data-tab="tab-comp-reasoning"><a>Reasoning</a></li>
-          <li data-tab="tab-comp-referring"><a>Referring</a></li>
-          <li data-tab="tab-comp-openvocab"><a>Open Vocabulary</a></li>
-          <li data-tab="tab-comp-semantic"><a>Semantic (Cityscapes)</a></li>
-        </ul>
-      </div>
-      <div class="tab-content">
-        <div id="tab-comp-reasoning" class="tab-pane is-active"></div>
-        <div id="tab-comp-referring" class="tab-pane" style="display:none;"></div>
-        <div id="tab-comp-openvocab" class="tab-pane" style="display:none;"></div>
-        <div id="tab-comp-semantic" class="tab-pane" style="display:none;"></div>
-      </div>
+      <div id="comparisons-list"></div>
     </div>
   </section>
 
-  <!-- Reasoning sliders -->
-  <section class="section">
+  <!-- Backend comparison -->
+  <section class="section alt-section">
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3" id="reasoning">Reasoning Queries Work Off the Shelf</h2>
-          <p class="subtitle is-6">ReasonSeg items segmented by LLMSeg with Gemini-3.7-Flash. The same model reads the
-            query and segments, with no agent wrapper or query rewriting. Drag the slider to compare the input
-            with the result.</p>
+          <h2 class="title is-3" id="backends">Complete Backend Comparison</h2>
+          <p class="subtitle is-6">LLMSeg is training-free, so the same pipeline runs on any multimodal LLM. Only the
+            backend changes between bars.</p>
         </div>
       </div>
-      <div class="columns">
-        <div class="column is-one-third">
-          <div class="img-compare">
-            <img class="ic-under" src="static/assets/reasoning/letters_recseg.jpg" alt="LLMSeg result" loading="lazy">
-            <div class="ic-over"><img src="static/assets/reasoning/letters_input.jpg" alt="Input" loading="lazy"></div>
-            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
-            <span class="ic-label ic-label-left">Input</span>
-            <span class="ic-label ic-label-right">LLMSeg</span>
-          </div>
-          <p class="query-text">&ldquo;In an educational setting, children often use different materials to learn about
-            letters, numbers, and words. What object in the picture could be used as a visual aid for learning about
-            letters and words?&rdquo;</p>
-        </div>
-        <div class="column is-one-third">
-          <div class="img-compare">
-            <img class="ic-under" src="static/assets/reasoning/teabowl_recseg.jpg" alt="LLMSeg result" loading="lazy">
-            <div class="ic-over"><img src="static/assets/reasoning/teabowl_input.jpg" alt="Input" loading="lazy"></div>
-            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
-            <span class="ic-label ic-label-left">Input</span>
-            <span class="ic-label ic-label-right">LLMSeg</span>
-          </div>
-          <p class="query-text">&ldquo;The general steps for brewing tea are to put tea leaves into a teacup and then
-            pour hot water over them. What container in the picture is most likely to be used next for pouring hot
-            water to make tea?&rdquo;</p>
-        </div>
-        <div class="column is-one-third">
-          <div class="img-compare">
-            <img class="ic-under" src="static/assets/reasoning/speed_recseg.jpg" alt="LLMSeg result" loading="lazy">
-            <div class="ic-over"><img src="static/assets/reasoning/speed_input.jpg" alt="Input" loading="lazy"></div>
-            <div class="ic-handle"><span class="ic-arrow-l"></span><span class="ic-arrow-r"></span></div>
-            <span class="ic-label ic-label-left">Input</span>
-            <span class="ic-label ic-label-right">LLMSeg</span>
-          </div>
-          <p class="query-text">&ldquo;the places where the driver can observe the speed&rdquo;</p>
-        </div>
-      </div>
+      <div class="chart-legend" id="backend-legend"></div>
+      <div id="backend-chart" class="bk-chart"></div>
+      <p class="has-text-centered caption">
+        <strong>Complete backend comparison.</strong> All 21 backends we ran, including Gemini&nbsp;3.8&nbsp;Flash,
+        Gemma&nbsp;4&nbsp;26B, and Qwen3.8&nbsp;27B. Stage-2 gIoU, 95% item-bootstrap intervals, and baselines use
+        the same 200 ReasonSeg val items.
+      </p>
     </div>
   </section>
 
