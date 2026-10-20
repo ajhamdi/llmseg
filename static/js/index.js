@@ -113,6 +113,23 @@ var COMPARISONS = [
   qual('ade20k_grandstand', 'ADE20K', 'grandstand')
 ];
 
+// Rare-domain pane (RF-100VL). The SAM-3 Agent baseline was not run here, so four columns.
+var DOMAINS = 'static/assets/domains/';
+var FOUR = [
+  ['input', 'Input'], ['gt', 'Ground truth'], ['sam3', 'SAM 3'], ['ours', 'LLMSeg']
+];
+function dom(slug, bench, query) {
+  return { dir: DOMAINS, slug: slug, bench: bench, query: query, cols: FOUR };
+}
+var DOMAIN_COMPARISONS = [
+  dom('invoice', 'Documents: invoice-processing', 'table'),
+  dom('diagram', 'Documents: activity-diagrams', 'action'),
+  dom('dumptruck', 'Aerial: construction equipment', 'dump truck'),
+  dom('mri', 'Medical: brain-tumors-MRI', 'pituitary'),
+  dom('xray', 'Medical: nih-xray', 'Pneumonia'),
+  dom('tooth', 'Medical: dentalai', 'Impacted Tooth')
+];
+
 /* --------------------------------------------------------------- helpers -- */
 
 function el(tag, cls, text) {
@@ -295,10 +312,10 @@ function renderBackendChart() {
   }
 }
 
-function renderComparisons() {
-  var pane = document.getElementById('comparisons-list');
+function renderComparisons(paneId, items) {
+  var pane = document.getElementById(paneId);
   if (!pane) return;
-  COMPARISONS.forEach(function (item) {
+  items.forEach(function (item) {
     var card = el('div', 'cmp-item');
     var head = el('div', 'cmp-head');
     head.appendChild(el('span', 'cmp-bench', item.bench));
@@ -327,7 +344,8 @@ renderResultCards('ref-figure', RESULTS.filter(function (r) { return r.agent; })
 renderResultCards('ov-figure', RESULTS.filter(function (r) { return !r.agent; }),
   ['gdino', 'sam3', 'noref', 'ours'], 80, 1, 1);
 renderBackendChart();
-renderComparisons();
+renderComparisons('comparisons-list', COMPARISONS);
+renderComparisons('domains-list', DOMAIN_COMPARISONS);
 
 $(document).ready(function () {
   // Tab switching (scoped per tab group)

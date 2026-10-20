@@ -63,13 +63,6 @@
                     <span>Code</span>
                   </a>
                 </span>
-                <!-- Results Link -->
-                <span class="link-block">
-                  <a href="#results" class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon"><i class="fas fa-trophy" style="color: #FFD700;"></i></span>
-                    <span>Results</span>
-                  </a>
-                </span>
               </div>
 
               <!-- Section Navigation Tags -->
@@ -87,6 +80,12 @@
                   </a>
                 </span>
                 <span class="link-block">
+                  <a href="#results" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-trophy" style="color: #FFD700;"></i></span>
+                    <span>Results</span>
+                  </a>
+                </span>
+                <span class="link-block">
                   <a href="#comparisons" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="fas fa-images" style="color: #F44336;"></i></span>
                     <span>Comparisons</span>
@@ -96,6 +95,12 @@
                   <a href="#backends" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon"><i class="fas fa-layer-group" style="color: #009688;"></i></span>
                     <span>Backends</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#rare-domains" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon"><i class="fas fa-microscope" style="color: #9C27B0;"></i></span>
+                    <span>Rare Domains</span>
                   </a>
                 </span>
               </div>
@@ -514,6 +519,22 @@
         Gemma&nbsp;4&nbsp;26B, and Qwen3.8&nbsp;27B. Stage-2 gIoU, 95% item-bootstrap intervals, and baselines use
         the same 200 ReasonSeg val items.
       </p>
+    </div>
+  </section>
+
+  <!-- Rare domain segmentation -->
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3" id="rare-domains">Rare Domain Segmentation</h2>
+          <p class="subtitle is-6">Examples from RF-100VL subsets spanning documents, aerial imagery, and medical
+            imaging. Each prompt is that subset's category name verbatim, and each ground-truth panel shows the
+            annotated detection box filled in. Some category names are domain jargon, so a failure here may reflect
+            vocabulary rather than localization.</p>
+        </div>
+      </div>
+      <div id="domains-list"></div>
     </div>
   </section>
 
